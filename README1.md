@@ -203,4 +203,36 @@ Làm cho heading nổi bật hơn so với content, thì thêm class
 }
 ```
 
-Biến toc cho phép chúng ta khai báo và sử dụng table trong nội dung bài post của mình
+Sử dụng toc để tạo 1 link khi click vào sẽ di chuyển tới một section mà bạn mong muốn. Trước hết,khai báo danh sách các header như sau
+
+```
+// content/articles/my-first-blog-post.md
+
+## This is a heading
+
+This is some more info
+
+### This is a sub heading
+
+This is some more info
+
+### This is another sub heading
+
+This is some more info
+
+## This is another heading
+
+This is some more info
+```
+
+Tiếp đến, trong file _slg.vue, thêm đoạn code
+
+```
+<nav>
+  <ul>
+    <li v-for="link of article.toc" :key="link.id">
+      <NuxtLink :to="`#${link.id}`">{{ link.text }}</NuxtLink>
+    </li>
+  </ul>
+</nav>
+```
