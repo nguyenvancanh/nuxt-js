@@ -236,3 +236,22 @@ Tiếp đến, trong file _slg.vue, thêm đoạn code
   </ul>
 </nav>
 ```
+Bây giờ thì toc đã hoạt động rồi đó, khi bạn click vào link, thì giao diện sẽ ngay lập tức di chuyển màn hình của bạn tới header tương ứng. Content module sẽ tự động thêm id và link vào từng header tương ứng bạn đã khai báo, bạn có thể dễ dàng kiểm tra với việc inspect những thẻ h2 đang được in ra trên màn hình. Và dễ nhiên, bạn có thể dễ dàng custom lại các class cho từng header của mình bằng cách 
+
+```
+:class="{ 'py-2': link.depth === 2, 'ml-2 pb-2': link.depth === 3 }"
+```
+
+## Sử dụng HTML trong file markdown
+
+Đôi khi bạn mong muốn có thể sử dụng HTML được trong file markdown. Điều này cũng k quá khó khăn, hãy thử thêm 1 thẻ div kèm theo đó là các class như sau
+
+```
+// content/articles/my-first-blog-post.md
+
+<div class="p-4 mb-4 text-white bg-blue-500">
+  This is HTML inside markdown that has a class of note
+</div>
+```
+Vô cùng đơn giản đúng k nào.
+
