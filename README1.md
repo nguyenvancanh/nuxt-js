@@ -253,5 +253,74 @@ Bây giờ thì toc đã hoạt động rồi đó, khi bạn click vào link, t
   This is HTML inside markdown that has a class of note
 </div>
 ```
-Vô cùng đơn giản đúng k nào.
+## Thêm component hiển thị tác giả bài viết
 
+Như bao trang blog khác, thì mỗi bài viết đều sẽ có tác giả cho bài viết đó, để thêm được block tác giả thì các bạn làm nhưu sau. 
+
+```
+// content/articles/my-first-blog-post.md
+---
+author:
+  name: Benjamin
+  bio: All about Benjamin
+  image: https://images.unsplash.com/.....
+---
+```
+Cần tạo thêm aothor component
+
+```
+touch components/global/Author.vue
+```
+sau đó thêm đoạn code
+
+```
+// components/global/Author.vue
+
+<template>
+  <div>
+    <img :src="author.image" />
+    <div>
+      <h4>Author</h4>
+      <p>{{ author.name }}</p>
+      <p>{{ author.bio }}</p>
+    </div>
+  </div>
+</template>
+```
+export trong thẻ script như sau
+
+```
+<script>
+  export default {
+    props: {
+      author: {
+        type: Object,
+        required: true
+      }
+    }
+  }
+</script>
+```
+
+Tương tự như component bên trên, để sử dụng được component author này thì làm như sau
+
+```
+<author :author="author"></author>
+```
+
+File _slug.vue đầy đủ sẽ là
+
+```
+<template>
+  <article>
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.description }}</p>
+    <img :src="article.img" :alt="article.alt" />
+    <p>Article last updated: {{ formatDate(article.updatedAt) }}</p>
+
+    <nuxt-content :document="article" />
+
+    <author :author="article.author" />
+  </article>
+</template>
+```
